@@ -1,0 +1,162 @@
+//REFLECTION OF PROJECT:
+Design Pattern:
+I chose to do the Singly Linked List as design implementation because I was short on time.
+I used a structure for the Nodes instead of class and did not embedd struct inside class.
+
+Challenges:
+I struggled developing the inviteGuest() algorithmn the most. I spent 3-4 days figuring
+it out. The algorithm which determines a a new guest has a matching last name from the
+list and to then look at first names was diffuclt because there are a lot of conditions
+to check before and after.
+
+Test Cases:
+//TEST CASES:
+    //TEST CASE 1: PASSED.
+    WeddingGuest groomsmen;
+    
+    groomsmen.inviteGuest("Tony", "Ambrosio", 40);
+    groomsmen.inviteGuest("Mike", "Wu", 43);
+    groomsmen.inviteGuest("Robert", "Wells", 44);
+    groomsmen.inviteGuest("Justin", "Sandobal", 37);
+    groomsmen.inviteGuest("Nelson", "Villaluz", 38);
+    groomsmen.inviteGuest("Long", "Le", 41);
+    for (int n = 0; n < groomsmen.guestCount(); n++)
+    {
+        std::string first;
+        std::string last;
+        int val;
+        groomsmen.verifyGuestOnTheList(n, first, last, val);
+        std::cout << first << " " << last << " " << val << std::endl;
+    }
+    //END OF TEST CASE 1.
+    */
+    
+    /*
+    //TEST CASE 2: PASSED.
+    //checking correct organization of duplicates and same last name guests.
+    WeddingGuest bridesmaids;
+    
+    //Allyson, Carlos, Irma, Jenny
+    bridesmaids.inviteGuest("Jenny", "Lopez", 22);
+    bridesmaids.inviteGuest("Irma", "Lopez", 45);
+    bridesmaids.inviteGuest("Allyson", "Lopez", 15);
+    bridesmaids.inviteGuest("Carlos", "Lopez", 15);
+    bridesmaids.inviteGuest("Brenda", "Blanco", 24);
+    bridesmaids.inviteGuest("Jesse", "Ventura", 24);
+    bridesmaids.inviteGuest("Irma", "Lopez", 45);
+    bridesmaids.inviteGuest("Clarissa", "Ron", 24);
+    bridesmaids.inviteGuest("Alex", "Rodriguez", 25);
+    bridesmaids.inviteGuest("Maria", "Ron", 37);
+    bridesmaids.inviteGuest("Lilian", "Villeda", 40);
+    bridesmaids.inviteGuest("Lilian", "Villeda", 40);
+    bridesmaids.printList();
+    std::cout << bridesmaids.guestCount() << std::endl; //10.
+    //END OF TEST CASE 2.
+    */
+    
+    /*
+    //TEST CASE 3: Passed.
+    //checking all member functions of WeddingGuest class.
+    WeddingGuest bridesmaids;
+    bridesmaids.inviteGuest("Allyson", "Lopez", 15);
+    bridesmaids.inviteGuest("Brenda", "Blanco", 24);
+    bridesmaids.inviteGuest("Jesse", "Ventura", 24);
+    bridesmaids.inviteGuest("Clarissa", "Ron", 24);
+    bridesmaids.inviteGuest("Alex", "Rodriguez", 25);
+    bridesmaids.inviteGuest("Maria", "Ron", 37);
+    bridesmaids.inviteGuest("Lilian", "Villeda", 40);
+    bridesmaids.printList();
+    
+    //test guestCount() function: Passed.
+    std::cout << bridesmaids.guestCount() << std::endl; //7
+        
+    //test noGuests() function: Passed.
+    //is the list empty?
+    std::cout << bridesmaids.noGuests() << std::endl; //0
+    
+    //test alterGuest() function: Passed.
+    std::cout << bridesmaids.alterGuest("Brenda", "Blanco", 12) << std::endl; //1
+
+    //test inviteOrAlter() function: Passed.
+    bridesmaids.inviteOrAlter("Lilian", "Villeda", 19);
+    bridesmaids.inviteOrAlter("Jamie", "Zion", 29);
+    bridesmaids.printList();
+    
+    //test crossGuestOff() function: Passed.
+    std::cout << bridesmaids.crossGuestOff("Jesse", "Ventura") << std::endl; //1
+    bridesmaids.printList();
+    
+    //test invitedToTheWedding() function: Passed.
+    //is x person invited to wedding?
+    std::cout << bridesmaids.invitedToTheWedding("Lilian", "Villeda") << std::endl; //1
+    std::cout << bridesmaids.invitedToTheWedding("Lola", "Villeda") << std::endl; //0
+    
+    //test matchInvitedGuest() function: Passed.
+    int x;
+    std::cout << bridesmaids.matchInvitedGuest("Clarissa", "Ron", x) << std::endl; //1
+    std::cout << x << std::endl; //24
+    
+    //test verifyGuestOnTheList() function: Passed.
+    std::string f;
+    std::string l;
+    int v;
+    
+    bridesmaids.verifyGuestOnTheList(1, f, l, v);
+    std::cout << f << " " << l << " " << v << std::endl;
+    
+    //test copy constructor function: Passed.
+    WeddingGuest superheros = bridesmaids;
+    std::cout << "bridesmaids list:" << std::endl;
+    bridesmaids.printList();
+    std::cout << "superheros list:" << std::endl;
+    superheros.printList();
+    
+    //test swapWeddingGuests() function: Passed.
+    superheros.inviteGuest("Aaron", "Acosta", 20);
+    superheros.swapWeddingGuests(bridesmaids);
+    std::cout << std::endl << "--------BREAK-------" << std::endl << std::endl;
+    superheros.printList(); //should not have Aaron.
+    bridesmaids.printList(); //should have Aarob.
+    std::cout << std::endl << "--------BREAK-------" << std::endl << std::endl;
+    
+    //test deconstructor function: Passed.
+    superheros.~WeddingGuest();
+    std::cout << superheros.guestCount() << std::endl; //0
+    
+    //test assigment operator function: Passed.
+    WeddingGuest ListOne;
+    ListOne.inviteGuest("Drake", "Acosta", 50);
+    ListOne.inviteGuest("Quincy", "Emmert", 22);
+    ListOne.inviteGuest("Andrew", "Gomez", 18);
+    
+    //assign bridesmaids to ListOne.
+    //size of ListOne is 3 & bridesmaid size is 8.
+    //ListOne should have size 8 after assign. oper. call.
+    ListOne = bridesmaids;
+    std::cout << ListOne.guestCount() << std::endl;
+    std::cout << bridesmaids.guestCount() << std::endl;
+    ListOne.printList();
+    //END OF TEST CASE 3.
+    */
+    
+    /*
+    //TEST CASE 4: Not Passed.
+    //checking non-member functions.
+     
+    //test attestGuests() function:
+    WeddingGuest goBruins;
+    goBruins.inviteGuest("Cobey","C", 35);
+    goBruins.inviteGuest("Dan","H", 38);
+    goBruins.inviteGuest("Dan","V", 44);
+    goBruins.inviteGuest("Dion","V", 45);
+    goBruins.printList();
+    std::cout << goBruins.guestCount();
+    //attestGuests("Dan", "*", goBruins, odResult);
+    //"Cobey" "C" 35 "Dan" "H" 38 "Dan" "V" 44 "Dion" "V" 45
+     
+    //test joinGuests() function:
+    //not fully implemented but shoudl be returning false.
+    //END OF TEST CASE 4.
+    */
+    
+//END ALL TEST CASES.
